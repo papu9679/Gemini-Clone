@@ -3,6 +3,7 @@ import express from 'express';
 const app = express();
 app.use(express.json());
 
+//get request
 app.get("/", (req, res) => {
     res.send("Welcome to Gemini Bot");
 });
@@ -11,6 +12,28 @@ app.get("/api/test", (req, res) => {
     res.json({
         success: true,
         message: "Backend is working"
+    });
+});
+
+//post request
+app.post("/api/chat", (req, res) => {
+    console.log("Body:", req.body);
+    console.log("Message:", req.body.message);
+
+    const { message } = req.body;
+    const cleanMessage = message.trim();
+
+    // if (!message) {
+    if(typeof message !== "string" || message.trim() === ""){
+        return res.status(400).json({
+            success: false,
+            message: "Message is required"
+        });
+    }
+
+    res.json({
+        success: true,
+        message: cleanMessage
     });
 });
 
