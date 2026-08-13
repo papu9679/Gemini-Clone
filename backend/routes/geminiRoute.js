@@ -16,8 +16,6 @@ router.post("/chat", async (req, res) => {
 
     const cleanMessage = message.trim();
 
-    const response = await generateResponse(cleanMessage);
-
     try {
         const response = await generateResponse(cleanMessage);
 

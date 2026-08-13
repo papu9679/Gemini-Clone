@@ -2,6 +2,8 @@ import express from 'express';
 import geminiRoute from './routes/geminiRoute.js';
 import dotenv from "dotenv";
 
+dotenv.config();
+
 const apiKey = process.env.GEMINI_API_KEY;
 
 const app = express();
