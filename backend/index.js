@@ -1,4 +1,5 @@
 import express from 'express';
+import geminiRoute from './routes/geminiRoute.js';
 
 const app = express();
 app.use(express.json());
@@ -16,26 +17,29 @@ app.get("/api/test", (req, res) => {
 });
 
 //post request
-app.post("/api/chat", (req, res) => {
-    console.log("Body:", req.body);
-    console.log("Message:", req.body.message);
+// app.post("/api/chat", (req, res) => {
+//     console.log("Body:", req.body);
+//     console.log("Message:", req.body.message);
 
-    const { message } = req.body;
-    const cleanMessage = message.trim();
+//     const { message } = req.body;
+//     const cleanMessage = message.trim();
 
-    // if (!message) {
-    if(typeof message !== "string" || message.trim() === ""){
-        return res.status(400).json({
-            success: false,
-            message: "Message is required"
-        });
-    }
+//     // if (!message) {
+//     if(typeof message !== "string" || message.trim() === ""){
+//         return res.status(400).json({
+//             success: false,
+//             message: "Message is required"
+//         });
+//     }
 
-    res.json({
-        success: true,
-        message: cleanMessage
-    });
-});
+//     res.json({
+//         success: true,
+//         message: cleanMessage
+//     });
+// });
+
+//call the geminiRouter
+app.use("/api", geminiRoute);
 
 const port = 3000;
 app.listen(port, () => {
