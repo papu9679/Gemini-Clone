@@ -18,10 +18,21 @@ router.post("/chat", async (req, res) => {
 
     const response = await generateResponse(cleanMessage);
 
-    res.json({
-        success: true,
-        response: response
-    });
+    try {
+        const response = await generateResponse(cleanMessage);
+
+        res.json({
+            success: true,
+            response: response
+        });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while generating the response"
+        });
+    }
 });
 
 export default router;
