@@ -1,36 +1,36 @@
 import express from 'express';
 import { Router } from 'express';
-import generateResponse from '../services/geminiService.js'
+import generateResponse from '../services/geminiService.js';
 
 const router = express.Router();
 
-router.post("/chat", async (req, res) => {
-    const { message } = req.body;
+router.post('/chat', async (req, res) => {
+	const { message } = req.body;
 
-    if (typeof message !== "string" || message.trim() === "") {
-        return res.status(400).json({
-            success: false,
-            message: "Message must be a non-empty string"
-        });
-    }
+	if (typeof message !== 'string' || message.trim() === '') {
+		return res.status(400).json({
+			success: false,
+			message: 'Message must be a non-empty string',
+		});
+	}
 
-    const cleanMessage = message.trim();
+	const cleanMessage = message.trim();
 
-    try {
-        const response = await generateResponse(cleanMessage);
+	try {
+		const response = await generateResponse(cleanMessage);
 
-        res.json({
-            success: true,
-            response: response
-        });
-    } catch (error) {
-        console.error("Gemini API Error:", error);
+		res.json({
+			success: true,
+			response: response,
+		});
+	} catch (error) {
+		console.error('Gemini API Error:', error);
 
-        res.status(500).json({
-            success: false,
-            message: "Something went wrong while generating the response"
-        });
-    }
+		res.status(500).json({
+			success: false,
+			message: 'Something went wrong while generating the response',
+		});
+	}
 });
 
 export default router;
