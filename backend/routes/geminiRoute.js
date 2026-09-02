@@ -13,10 +13,10 @@ router.post('/chat', async (req, res) => {
 		});
 	}
 
-	const cleanMessage = message.trim();
+	const massageClean = message.trim();
 
 	try {
-		const response = await generateResponse(cleanMessage);
+		const response = await generateResponse(massageClean);
 
 		res.json({
 			success: true,

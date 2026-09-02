@@ -12,7 +12,7 @@ async function generateResponse(message) {
 		}
 
 		const ai = new GoogleGenerativeAI(apiKey);
-		const model = ai.getGenerativeModel({ model: 'gemini-2.0-flash' });
+		const model = ai.getGenerativeModel({ model: 'gemini-3.6-flash' });
 		const response = await model.generateContent(message);
 
 		return response.response.text();
