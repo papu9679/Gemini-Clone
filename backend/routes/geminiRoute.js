@@ -1,5 +1,4 @@
 import express from 'express';
-import { Router } from 'express';
 import generateResponse from '../services/geminiService.js';
 
 const router = express.Router();
@@ -24,11 +23,13 @@ router.post('/chat', async (req, res) => {
 			response: response,
 		});
 	} catch (error) {
-		console.error('Gemini API Error:', error);
+		console.error('Gemini API Error:', error.message);
+		console.error('Full Error:', error);
 
 		res.status(500).json({
 			success: false,
 			message: 'Something went wrong while generating the response',
+			error: error.message,
 		});
 	}
 });

@@ -1,24 +1,23 @@
-import express from 'express';
-import geminiRoute from './routes/geminiRoute.js';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const apiKey = process.env.GEMINI_API_KEY;
+import express from 'express';
+import geminiRoute from './routes/geminiRoute.js';
 
 const app = express();
 app.use(express.json());
 
 //get request
-app.get("/", (req, res) => {
-    res.send("Welcome to Gemini Bot");
+app.get('/', (req, res) => {
+	res.send('Welcome to Gemini Bot');
 });
 
-app.get("/api/test", (req, res) => {
-    res.json({
-        success: true,
-        message: "Backend is working"
-    });
+app.get('/api/test', (req, res) => {
+	res.json({
+		success: true,
+		message: 'Backend is working',
+	});
 });
 
 //post request
@@ -44,9 +43,9 @@ app.get("/api/test", (req, res) => {
 // });
 
 //call the geminiRouter
-app.use("/api", geminiRoute);
+app.use('/api', geminiRoute);
 
 const port = 3000;
 app.listen(port, () => {
-    console.log(`http://localhost:${port}/`);
+	console.log(`http://localhost:${port}/`);
 });
